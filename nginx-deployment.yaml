@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 1  # Adjust the number of pods
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest # Specify the desired Nginx image version
+        ports:
+        - containerPort: 80
+      resources:  # Add resource limits and requests
+        limits:
+          cpu: "500m"  # Limit CPU usage to 500 millicores
+          memory: "512Mi"  # Limit memory usage to 512 MiB
+        requests:
+          cpu: "250m"  # Request at least 250 millicores
+          memory: "256Mi"  # Request at least 256 MiB
+          
